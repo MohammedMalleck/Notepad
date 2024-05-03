@@ -1,4 +1,4 @@
-import { notesStorage } from "./data.js";
+import { Note  } from "./data-oop.js";
 import { renderMainPage } from "./renderMainPage.js";
 import { setCopyEvents } from "./setCopyEvents.js";
 
@@ -7,18 +7,19 @@ const sideEl = document.querySelector('.js-side-section');
 const mainEl = document.querySelector('.js-main-section'); 
 
 export function renderSideNotes(enableAnimation){
-  if(notesStorage.length > 0){
+  const NoteObject = new Note();
+  if(NoteObject.notesStorage.length > 0){
     //access first and last ID
-    const firstNoteId  =  notesStorage[0].id
-    const lastIndex =  (notesStorage.length - 1);
-    const lastNoteID = notesStorage[lastIndex].id;
+    const firstNoteId  =  NoteObject.notesStorage[0].id
+    const lastIndex =  (NoteObject.notesStorage.length - 1);
+    const lastNoteID = NoteObject.notesStorage[lastIndex].id;
     
     //check if the user clicked any note before
     let noteId = JSON.parse(localStorage.getItem('clickedNoteId')) || firstNoteId;
   
     let html = '';
 
-    notesStorage.forEach((note)=>{
+    NoteObject.notesStorage.forEach((note)=>{
       //add active class to the recently clicked note(deafult note is first note);
       const classNoteActive = Number(noteId) === note.id ? 'active-note' : ''; 
       //add z-index to all notes when a new note is added to give a good aniamtion effect.
@@ -157,7 +158,7 @@ export function renderSideNotes(enableAnimation){
         lastNoteEl.classList.remove('show-movement-animation');
         //if there is only one note in the notes storage , then invoke the render main page 
         //function.
-        if(notesStorage.length === 1){
+        if(NoteObject.notesStorage.length === 1){
           //render main page after animation is completed
           renderMainPage();
           //set copy btn events 
