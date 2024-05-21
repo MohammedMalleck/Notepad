@@ -1,4 +1,4 @@
-import { Note } from "./data-oop.js";
+import { notesStorage , saveNotesStorage } from "./data.js";
 import { renderSideNotes } from "./renderSideNotes.js";
 
 //access elements present in page
@@ -9,8 +9,7 @@ let headingElementEnter;
 let subHeadingElementEnter;
 
 export function renderMainPage(){
-  const NoteObject = new Note();
-  if(NoteObject.notesStorage.length > 0){
+  if(notesStorage.length > 0){
     //access the note with active class
     const currentNote = document.querySelector('.active-note');
     //fetch the ID assigned to this note
@@ -21,7 +20,7 @@ export function renderMainPage(){
     //create style statement for saved font size
     const textStyle = textFontSize ? `style="font-size:${textFontSize};"` : '';
     //find the matching note
-    const matchedNote = NoteObject.notesStorage.find(note => currentNoteId === note.id)
+    const matchedNote = notesStorage.find(note => currentNoteId === note.id)
 
     const html = 
     `
@@ -64,13 +63,13 @@ export function renderMainPage(){
      const activeNote = document.querySelector('.active-note');
      const activeNoteId = Number(activeNote.id);
      //save the new heading in notes array
-     NoteObject.notesStorage.forEach((note)=>{
+     notesStorage.forEach((note)=>{
       if(note.id === activeNoteId){
         note.heading = newHeadingNote;
       }
      });
      //save the modified notes array
-     NoteObject.saveNotesStorage();
+     saveNotesStorage(notesStorage);
      //render side notes section
      renderSideNotes();
     });
@@ -94,13 +93,13 @@ export function renderMainPage(){
         const activeNote = document.querySelector('.active-note');
         const activeNoteId = Number(activeNote.id);
         //save the new sub heading in the notes array
-        NoteObject.notesStorage.forEach((note)=>{
+        notesStorage.forEach((note)=>{
         if(note.id === activeNoteId){
           note.subHeading = newSubHeadingNote;
         }
         });
         //save the modified notes array
-        NoteObject.saveNotesStorage();
+        saveNotesStorage(notesStorage);
       }
     });
 
@@ -123,13 +122,13 @@ export function renderMainPage(){
         const activeNote = document.querySelector('.active-note');
         const activeNoteId = Number(activeNote.id);
         //save the new text in the notes array
-        NoteObject.notesStorage.forEach((note)=>{
+        notesStorage.forEach((note)=>{
         if(note.id === activeNoteId){
           note.text= newTextNote;
         }
         });
         //save the modified notes array
-        NoteObject.saveNotesStorage();
+        saveNotesStorage(notesStorage);
       }
     });
 

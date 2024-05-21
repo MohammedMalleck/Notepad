@@ -1,4 +1,4 @@
-import { Note } from "./data-oop.js";
+import { removeNote , notesStorage } from "./data.js";
 import { renderSideNotes  } from "./renderSideNotes.js";
 import { renderMainPage } from "./renderMainPage.js";
 import { setCopyEvents } from "./setCopyEvents.js";
@@ -37,13 +37,16 @@ export function setEventListeners(){
     });
   }
   function findDeletedNoteIndex(activeNoteId){
-    const NoteObject = new Note();
-    const activeIndex = NoteObject.notesStorage.findIndex( note => activeNoteId === note.id);
+    let activeIndex;
+    notesStorage.forEach((note,index)=>{
+      if(activeNoteId === note.id){
+        activeIndex = index
+      }
+    })
     return activeIndex;
   }
   function addAnimationToGreaterIndexes(activeIndex){
-    const NoteObject = new Note();
-    NoteObject.notesStorage.forEach((note,index)=>{
+    notesStorage.forEach((note,index)=>{
       if(index > activeIndex){
         const noteId = note.id;
         const noteEl = document.getElementById(`${noteId}`);
@@ -52,8 +55,7 @@ export function setEventListeners(){
     });
   }
   function handleDeletedNote(activeNoteId){
-    const NoteObject = new Note();
-    NoteObject.removeNote(activeNoteId);
+    removeNote(activeNoteId);
     renderSideNotes(false);
     renderMainPage();
     //add copy btn events to new elements
