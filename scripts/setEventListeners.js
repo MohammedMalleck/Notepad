@@ -58,8 +58,6 @@ export function setEventListeners(){
     removeNote(activeNoteId);
     renderSideNotes(false);
     renderMainPage();
-    //add copy btn events to new elements
-    setCopyEvents();
   }
 
   /*

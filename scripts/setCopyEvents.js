@@ -1,9 +1,5 @@
 export function setCopyEvents(){
   const copyEl = document.querySelector('.js-copy');
-  const copiedMessageEl = document.querySelector('.copied-message');
-  const headingEl = document.querySelector('.js-txt-heading');
-  const subHeadingEl = document.querySelector('.js-txt-sub-heading');
-  const textEl = document.querySelector('.js-txt-body');
   let copyTextString;
 
   //on tirggering mousedown event on copy icon,
@@ -15,6 +11,12 @@ export function setCopyEvents(){
   copyEl.addEventListener('click',handleCopyEvent);
 
   function handleCopyEvent(){
+    //acccess el
+    const copiedMessageEl = document.querySelector('.copied-message');
+    const headingEl = document.querySelector('.js-txt-heading');
+    const subHeadingEl = document.querySelector('.js-txt-sub-heading');
+    const textEl = document.querySelector('.js-txt-body');
+
     //get the selection object
     const selection = window.getSelection();
     //using the selection object get the focused node

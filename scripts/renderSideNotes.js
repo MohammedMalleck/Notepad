@@ -62,8 +62,6 @@ export function renderSideNotes(enableAnimation){
           noteSideEl.classList.add('active-note');
           //render main page
           renderMainPage();
-          //add copy events to new elements
-          setCopyEvents();
           //save the ID of the newly selected note
           saveClickedNoteInfo(noteSideEl.id);
           hideSideEl();
@@ -155,14 +153,7 @@ export function renderSideNotes(enableAnimation){
       function handleLastNoteAnimation(){
         //remove the animation class
         lastNoteEl.classList.remove('show-movement-animation');
-        //if there is only one note in the notes storage , then invoke the render main page 
-        //function.
-        if(notesStorage.length === 1){
-          //render main page after animation is completed
-          renderMainPage();
-          //set copy btn events 
-          setCopyEvents();
-        }
+        renderMainPage();
         //remove the negavtive index's from all elements since we dont need them anymore
         removeNegativeZIndexes();
         //remove the event listener also because we dont want to execute this code when 
